@@ -6,6 +6,7 @@ import { sendWhatsAppImage, sendWhatsAppMessage } from '@server/services/whatsap
 import { ADMIN_MESSAGES } from '@server/services/whatsapp/messages';
 import { resolveInstanceId } from '@server/services/whatsapp/instanceResolver';
 import { broadcast } from '@server/services/wsServer';
+import { getStoredContactId } from '@server/utils/demoPrivacy';
 import { requireConnected } from './whatsapp.controller';
 
 export function getMessagesController(req: Request, res: Response): void {
@@ -59,7 +60,7 @@ export async function replyMessageController(req: Request, res: Response): Promi
   try {
     await sendWhatsAppMessage(phone, message, instanceId);
     const now = new Date().toISOString().replace('T', ' ').slice(0, 19);
-    stmts.insertMessage.run(`Bot -> ${phone}`, message, null, instanceId, now);
+    stmts.insertMessage.run(`Bot -> ${getStoredContactId(phone)}`, message, null, instanceId, now);
     broadcast('messages:new', { instanceId });
     res.json({ success: true });
   } catch (error) {
@@ -101,7 +102,7 @@ export async function replyImageController(req: Request, res: Response): Promise
     );
     const logText = caption ? `[imagen] ${caption}` : '[imagen]';
     const now = new Date().toISOString().replace('T', ' ').slice(0, 19);
-    stmts.insertMessage.run(`Bot -> ${phone}`, logText, null, instanceId, now);
+    stmts.insertMessage.run(`Bot -> ${getStoredContactId(phone)}`, logText, null, instanceId, now);
     broadcast('messages:new', { instanceId });
     res.json({ success: true });
   } catch (error) {

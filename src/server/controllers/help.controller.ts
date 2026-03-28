@@ -10,6 +10,7 @@ import { broadcast } from '@server/services/wsServer';
 import { reply } from '@server/services/whatsapp/sender';
 import { DEFAULT_INSTANCE_ID, restoreUserState } from '@server/services/whatsapp/state';
 import type { HelpRequestRow } from '@server/types/help';
+import { getStoredContactId } from '@server/utils/demoPrivacy';
 
 export async function getHelpRequestsController(req: Request, res: Response): Promise<void> {
   const parsed = helpRequestsQuerySchema.safeParse(req.query);
@@ -44,7 +45,7 @@ export async function createHelpRequestController(req: Request, res: Response): 
     silent = false,
   } = parsed.data;
 
-  const normalizedPhone = phone_number.replace(/\D/g, '');
+  const normalizedPhone = getStoredContactId(phone_number);
 
   try {
     const existing = stmts.selectHelpRequestByPhone.get(normalizedPhone) as HelpRequestRow | undefined;

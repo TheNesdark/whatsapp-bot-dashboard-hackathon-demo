@@ -4,6 +4,7 @@ import { sendTextMessage, sendImageMessage, sendButtonMessage, sendListMessage }
 import { stmts } from '@server/db/db';
 import { broadcast } from '@server/services/wsServer';
 import { getWabaAccessToken } from '@server/utils/sysConfig';
+import { getStoredContactId, resolveDeliveryTarget } from '@server/utils/demoPrivacy';
 import type { ButtonOption, ListOption, ReplyMessage } from '@server/types';
 
 /** Obtiene la configuración WABA de una instancia (token global + número por instancia) */
@@ -30,7 +31,7 @@ function getConfigForInstance(instanceId: number): WabaConfig | null {
 export async function sendWhatsAppMessage(to: string, text: string, instanceId = 1): Promise<void> {
   const config = getConfigForInstance(instanceId);
   if (!config) return;
-  await sendTextMessage(config, to, text);
+  await sendTextMessage(config, resolveDeliveryTarget(to), text);
 }
 
 /** Envía una imagen via WhatsApp Business API */
@@ -42,7 +43,7 @@ export async function sendWhatsAppImage(
 ): Promise<void> {
   const config = getConfigForInstance(instanceId);
   if (!config) return;
-  await sendImageMessage(config, to, image, caption);
+  await sendImageMessage(config, resolveDeliveryTarget(to), image, caption);
 }
 
 /** Envía un mensaje de botones (interactive) vía WhatsApp Business API */
@@ -54,7 +55,7 @@ export async function sendWhatsAppButtons(
 ): Promise<void> {
   const config = getConfigForInstance(instanceId);
   if (!config) return;
-  await sendButtonMessage(config, to, text, buttons);
+  await sendButtonMessage(config, resolveDeliveryTarget(to), text, buttons);
 }
 
 /** Envía un mensaje de lista (interactive list) vía WhatsApp Business API */
@@ -67,7 +68,7 @@ export async function sendWhatsAppList(
 ): Promise<void> {
   const config = getConfigForInstance(instanceId);
   if (!config) return;
-  await sendListMessage(config, to, text, buttonText, sections);
+  await sendListMessage(config, resolveDeliveryTarget(to), text, buttonText, sections);
 }
 
 /**
@@ -85,7 +86,8 @@ export async function reply(
   const config = getConfigForInstance(instanceId);
   if (!config) return;
 
-  const to = phone;
+  const to = resolveDeliveryTarget(phone);
+  const contactId = getStoredContactId(phone);
 
   try {
     if (typeof message === 'string') {
@@ -107,7 +109,7 @@ export async function reply(
         logText = `${message.text} [list:${message.sections.length} sections]`;
       }
       const now = new Date().toISOString().replace('T', ' ').slice(0, 19);
-      stmts.insertMessage.run(`Bot -> ${to}`, logText, null, instanceId, now);
+      stmts.insertMessage.run(`Bot -> ${contactId}`, logText, null, instanceId, now);
       broadcast('messages:new', { instanceId });
     } catch (e: unknown) {
       console.error(`[WA#${instanceId}] Error guardando mensaje del bot en BD:`, e);

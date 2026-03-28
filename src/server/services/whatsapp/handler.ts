@@ -8,6 +8,7 @@ import { broadcast, onServerEvent } from '@server/services/wsServer';
 import { getSettings, getHorarioConfig, isWithinSchedule } from './config';
 import { COMMAND_MESSAGES, ERROR_MESSAGES } from './messages';
 import { FlowEngine } from './flows/FlowEngine';
+import { getStoredContactId } from '@server/utils/demoPrivacy';
 import type { FlowDefinition } from '@shared/flow';
 
 // ── Caché LRU para evitar procesar el mismo mensaje dos veces ─────────────────
@@ -115,9 +116,10 @@ async function processMessage(msg: ParsedWebhookMessage, instanceId: number): Pr
   }
 
   const normalizedFrom = normalizePhoneForStorage(from);
+  const contactId = getStoredContactId(normalizedFrom);
   try {
     const now = new Date().toISOString().replace('T', ' ').slice(0, 19);
-    stmts.insertMessage.run(normalizedFrom, body, id ?? null, instanceId, now);
+    stmts.insertMessage.run(contactId, body, id ?? null, instanceId, now);
     broadcast('messages:new', { instanceId });
   } catch (e: unknown) {
     console.error(`[WA#${instanceId}] Error guardando mensaje:`, e);
@@ -125,7 +127,7 @@ async function processMessage(msg: ParsedWebhookMessage, instanceId: number): Pr
 
   let helpRequest: { id: number; status: string } | undefined;
   try {
-    helpRequest = stmts.selectHelpRequestByPhone.get(normalizedFrom) as
+    helpRequest = stmts.selectHelpRequestByPhone.get(contactId) as
       | { id: number; status: string }
       | undefined;
   } catch (err) {
@@ -136,14 +138,14 @@ async function processMessage(msg: ParsedWebhookMessage, instanceId: number): Pr
     return;
   }
 
-  const state = inst.userStates.get(normalizedFrom);
+  const state = inst.userStates.get(contactId);
   const settings = getSettings(instanceId);
 
   if (EXIT_COMMANDS.has(body.toLowerCase().trim())) {
-    instanceManager.clearUserState(instanceId, normalizedFrom);
+    instanceManager.clearUserState(instanceId, contactId);
     try {
       await reply(
-        normalizedFrom,
+        contactId,
         instanceId,
         state ? COMMAND_MESSAGES.EXIT_WITH_SESSION : COMMAND_MESSAGES.EXIT_NO_SESSION,
       );
@@ -156,7 +158,7 @@ async function processMessage(msg: ParsedWebhookMessage, instanceId: number): Pr
   const horario = getHorarioConfig(settings);
   if (!isWithinSchedule(horario)) {
     try {
-      await reply(normalizedFrom, instanceId, horario.mensajeRechazo);
+      await reply(contactId, instanceId, horario.mensajeRechazo);
     } catch (err) {
       console.warn(`[WA#${instanceId}] Error enviando mensaje fuera de horario:`, err);
     }
@@ -165,16 +167,16 @@ async function processMessage(msg: ParsedWebhookMessage, instanceId: number): Pr
 
   try {
     if (!state) {
-      await flowEngine.handleNewConversation(normalizedFrom, inst, settings, instanceId);
+      await flowEngine.handleNewConversation(contactId, inst, settings, instanceId);
     } else {
-      await flowEngine.processMessage(normalizedFrom, payloadId ?? body, state, instanceId);
+      await flowEngine.processMessage(contactId, payloadId ?? body, state, instanceId);
     }
-    instanceManager.touchState(instanceId, normalizedFrom);
+    instanceManager.touchState(instanceId, contactId);
   } catch (err) {
     console.warn(`[WA#${instanceId}] Error en flujo:`, err);
-    instanceManager.clearUserState(instanceId, normalizedFrom);
+    instanceManager.clearUserState(instanceId, contactId);
     try {
-      await reply(normalizedFrom, instanceId, ERROR_MESSAGES.UNEXPECTED_ERROR);
+      await reply(contactId, instanceId, ERROR_MESSAGES.UNEXPECTED_ERROR);
     } catch (replyErr) {
       console.warn(`[WA#${instanceId}] Error enviando mensaje de error:`, replyErr);
     }

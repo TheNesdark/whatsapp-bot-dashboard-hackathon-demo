@@ -35,9 +35,9 @@ export const DEFAULT_FLOW_APPOINTMENT_TYPES = [
 
 export const DEFAULT_FLOW_MESSAGES = {
   WELCOME:
-    'Hola. Bienvenido a la demo. Te haremos unas preguntas breves para registrar tu solicitud.',
+    'Hola. Bienvenido a la demo publica. No compartas datos personales sensibles. Tu numero se anonimiza y no se guarda en texto plano.',
   AUTH_INFO:
-    'Antes de continuar, necesitamos tu autorizacion para usar la informacion que compartas en esta conversacion.',
+    'Antes de continuar, recuerda que esta es una prueba publica. Comparte solo datos de ejemplo o informacion no sensible.',
   AUTH_TITLE:
     'Autorizas el uso de tus datos para esta demo?',
   AUTH_REJECT:
