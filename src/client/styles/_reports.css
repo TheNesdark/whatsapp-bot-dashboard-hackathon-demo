@@ -1,0 +1,536 @@
+/* ============================================================
+   REPORTS
+   Reports page components
+   ============================================================ */
+
+/* ── Stat card text ── */
+.rep-stat-value {
+    font-size: 22px;
+    font-weight: 700;
+    line-height: 1.2;
+    color: var(--text-1);
+    margin: 0;
+}
+
+.rep-stat-label {
+    font-size: 11px;
+    color: var(--text-3);
+    margin: 0;
+    margin-top: 1px;
+}
+
+.rep-stat-sub {
+    font-size: 10px;
+    color: var(--text-4);
+    margin: 0;
+    margin-top: 2px;
+}
+
+/* ── Header actions ── */
+.rep-header-actions {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+    flex-shrink: 0;
+}
+
+/* ── Loading / Error ── */
+.rep-center {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 40px 0;
+    color: var(--text-3);
+    font-size: 14px;
+}
+
+.rep-error {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 12px 14px;
+    background: var(--danger-bg);
+    border: 1px solid var(--danger-border);
+    border-radius: var(--radius);
+    color: var(--danger);
+    font-size: 13px;
+}
+
+/* ── Summary cards ── */
+.rep-summary-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 16px;
+    margin-bottom: 20px;
+}
+
+.rep-stat-card {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    padding: 18px 20px;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow);
+    transition: transform 0.2s ease, border-color 0.2s ease;
+}
+
+.rep-stat-card:hover {
+    border-color: var(--accent);
+    transform: translateY(-2px);
+}
+
+.rep-stat-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 42px;
+    height: 42px;
+    border-radius: 12px;
+    flex-shrink: 0;
+    font-size: 18px;
+}
+
+.rep-stat-card--default .rep-stat-icon {
+    background: #f4f4f5;
+    color: var(--text-2);
+}
+
+.rep-stat-card--green .rep-stat-icon {
+    background: #dcfce7;
+    color: #16a34a;
+}
+
+.rep-stat-card--amber .rep-stat-icon {
+    background: #fef3c7;
+    color: #d97706;
+}
+
+.rep-stat-card--red .rep-stat-icon {
+    background: #fee2e2;
+    color: #dc2626;
+}
+
+.rep-stat-card--blue .rep-stat-icon {
+    background: #dbeafe;
+    color: #2563eb;
+}
+
+.rep-stat-card--purple .rep-stat-icon {
+    background: #f3e8ff;
+    color: #7c3aed;
+}
+
+/* ── Filter bar ── */
+.rep-filter-bar {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    padding: 12px 20px;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow);
+    margin-bottom: 20px;
+    flex-wrap: wrap;
+}
+
+.rep-filter-icon {
+    color: var(--text-4);
+    display: flex;
+    align-items: center;
+    flex-shrink: 0;
+    margin-right: 4px;
+}
+
+.rep-filter-group {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.rep-filter-label {
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--text-2);
+    white-space: nowrap;
+}
+
+.rep-filter-select {
+    height: 32px;
+    padding: 0 10px;
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    font-size: 13px;
+    color: var(--text-1);
+    background: var(--bg);
+    cursor: pointer;
+    min-width: 130px;
+    transition: border-color 0.15s;
+}
+
+.rep-filter-select:focus {
+    outline: none;
+    border-color: var(--accent);
+}
+
+.rep-filter-reset {
+    height: 26px;
+    padding: 0 10px;
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    font-size: 11px;
+    font-weight: 500;
+    color: var(--text-3);
+    background: none;
+    cursor: pointer;
+    transition: color 0.12s, border-color 0.12s;
+    white-space: nowrap;
+    margin-left: auto;
+}
+
+.rep-filter-reset:hover {
+    color: var(--danger);
+    border-color: var(--danger-border);
+    background: var(--danger-bg);
+}
+
+/* ── Filter tag badge inside card header ── */
+.rep-card-filter-tag {
+    margin-left: 6px;
+    padding: 1px 7px;
+    background: var(--info-bg);
+    border: 1px solid var(--info-border);
+    border-radius: 99px;
+    font-size: 11px;
+    font-weight: 500;
+    color: #2563eb;
+}
+
+/* ── Export dropdown ── */
+.rep-export-wrap {
+    position: relative;
+}
+
+.rep-export-btn {
+    gap: 5px;
+}
+
+.rep-export-menu {
+    position: absolute;
+    right: 0;
+    top: calc(100% + 4px);
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+    min-width: 100%;
+    z-index: 100;
+    overflow: hidden;
+    animation: fade-in 0.1s ease;
+}
+
+.rep-export-item {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    padding: 7px 16px;
+    font-size: 13px;
+    color: var(--text-2);
+    background: none;
+    border: none;
+    cursor: pointer;
+    text-align: left;
+    transition: background 0.1s;
+}
+
+.rep-export-item:hover {
+    background: var(--bg);
+    color: var(--text-1);
+}
+
+.rep-export-item + .rep-export-item {
+    border-top: 1px solid var(--border-light);
+}
+
+.rep-export-ext {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 42px;
+    height: 20px;
+    border-radius: 3px;
+    font-size: 10px;
+    font-weight: 700;
+    background: #e4e4e7;
+    color: var(--text-2);
+    flex-shrink: 0;
+    letter-spacing: 0.02em;
+}
+
+.rep-export-ext--excel {
+    background: #dcfce7;
+    color: #15803d;
+}
+
+/* ── Generic card ── */
+.rep-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow);
+    padding: 20px 24px;
+    margin-bottom: 16px;
+    transition: transform 0.2s ease;
+}
+
+.rep-card-header {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--text-1);
+    margin-bottom: 20px;
+    border-bottom: 1px solid var(--border-light);
+    padding-bottom: 12px;
+}
+
+.rep-card-header svg {
+    color: var(--accent);
+    opacity: 0.8;
+}
+
+.rep-card-total {
+    margin-left: auto;
+    font-size: 12px;
+    font-weight: 500;
+    color: var(--text-3);
+    background: var(--surface-2);
+    padding: 2px 10px;
+    border-radius: 99px;
+}
+
+.rep-empty {
+    font-size: 13px;
+    color: var(--text-3);
+    text-align: center;
+    padding: 16px 0;
+}
+
+/* ── Two column layout ── */
+.rep-two-col {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 14px;
+    margin-bottom: 14px;
+}
+
+@media (max-width: 700px) {
+    .rep-two-col {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* ── Status stacked bar (used for the mini progress bar in cards) ── */
+.rep-status-bar {
+    display: flex;
+    height: 10px;
+    border-radius: 99px;
+    overflow: hidden;
+    background: var(--surface-2);
+    margin-bottom: 12px;
+}
+
+.rep-status-seg {
+    transition: width 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.rep-status-seg--green {
+    background: var(--success);
+}
+
+.rep-status-seg--amber {
+    background: var(--warning);
+}
+
+.rep-status-seg--red {
+    background: var(--danger);
+}
+
+.rep-status-legend {
+    display: flex;
+    gap: 16px;
+    font-size: 11px;
+    color: var(--text-3);
+    align-items: center;
+    flex-wrap: wrap;
+    margin-top: 4px;
+}
+
+.rep-legend-dot {
+    display: inline-block;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    margin-right: 4px;
+}
+
+.rep-legend-dot--green {
+    background: var(--success);
+}
+
+.rep-legend-dot--amber {
+    background: var(--warning);
+}
+
+.rep-legend-dot--red {
+    background: var(--danger);
+}
+
+/* ── Cleanup old manual chart styles ── */
+/* Replaced by Recharts but kept some structural containers if needed */
+
+.rep-hbar-list, .rep-day-chart-wrap, .rep-day-chart {
+    display: none; /* Hide old manual styles */
+}
+
+.rep-day-col {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    flex: 1;
+    min-width: 14px;
+}
+
+.rep-day-bar-wrap {
+    width: 100%;
+    flex: 1;
+    display: flex;
+    align-items: flex-end;
+    gap: 2px;
+}
+
+.rep-day-bar {
+    width: 100%;
+    border-radius: 3px 3px 0 0;
+    transition: height 0.35s ease;
+    min-width: 3px;
+    min-height: 0;
+    position: relative;
+    overflow: hidden;
+}
+
+.rep-bar-num {
+    position: absolute;
+    top: 3px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 9px;
+    font-weight: 700;
+    color: #fff;
+    white-space: nowrap;
+    line-height: 1;
+    pointer-events: none;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.45);
+}
+
+.rep-bar-num--light {
+    font-size: 8px;
+    font-weight: 700;
+}
+
+.rep-day-bar--a,
+.rep-day-bar--r {
+    width: calc(50% - 1px);
+    background: transparent;
+}
+
+.rep-day-bar--a {
+    background: var(--success);
+}
+
+.rep-day-bar--r {
+    background: var(--danger);
+}
+
+.rep-day-label {
+    flex-shrink: 0;
+    height: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 9px;
+    color: var(--text-4);
+    white-space: nowrap;
+    line-height: 1;
+    transform: rotate(-45deg);
+    transform-origin: center center;
+    overflow: visible;
+}
+
+/* ── Operators Table ── */
+.rep-table-wrap {
+    overflow-x: auto;
+    margin: 0 -24px -20px; /* Offset card padding */
+}
+
+.rep-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 13px;
+}
+
+.rep-table th {
+    padding: 12px 24px;
+    text-align: left;
+    font-size: 11px;
+    font-weight: 700;
+    color: var(--text-3);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    background: var(--surface-2);
+    border-bottom: 1px solid var(--border);
+}
+
+.rep-table td {
+    padding: 14px 24px;
+    border-bottom: 1px solid var(--border-light);
+    color: var(--text-1);
+    transition: background 0.1s;
+}
+
+.rep-table tbody tr:last-child td {
+    border-bottom: none;
+}
+
+.rep-table tbody tr:hover td {
+    background: var(--surface-2);
+}
+
+.rep-td-label {
+    font-weight: 500;
+}
+
+.rep-td-num {
+    text-align: right;
+    font-variant-numeric: tabular-nums;
+    color: var(--text-2);
+}
+
+.rep-td-green {
+    color: var(--success) !important;
+    font-weight: 600;
+}
+
+.rep-td-red {
+    color: var(--danger) !important;
+    font-weight: 600;
+}
+
+.rep-td-amber {
+    color: var(--warning, #f59e0b) !important;
+    font-weight: 600;
+}

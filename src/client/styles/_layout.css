@@ -1,0 +1,75 @@
+/* ============================================================
+   LAYOUT
+   ============================================================ */
+.app-layout {
+    display: flex;
+    height: 100vh;
+    overflow: hidden;
+    background: var(--bg);
+}
+
+.main-scroll {
+    flex: 1;
+    overflow-y: auto;
+    min-height: 0;
+}
+
+/* Chat page needs full height without outer scroll */
+.main-scroll:has(.chat-page) {
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+}
+
+/* ── Page ── */
+.page {
+    padding: 22px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    animation: fade-in 0.18s ease both;
+}
+
+.page--center {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 60vh;
+}
+
+.page-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.page-title {
+    font-size: 22px;
+    font-weight: 600;
+    color: var(--text-1);
+    letter-spacing: -0.02em;
+    margin: 0;
+}
+
+.page-subtitle {
+    font-size: 12px;
+    color: var(--text-3);
+    margin: 2px 0 0;
+}
+
+/* ── Spinner / Loading ── */
+.spinner-page {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+}
+
+.spinner {
+    width: 28px;
+    height: 28px;
+    border: 2px solid var(--border);
+    border-top-color: var(--text-2);
+    border-radius: 50%;
+    animation: spin 0.7s linear infinite;
+}

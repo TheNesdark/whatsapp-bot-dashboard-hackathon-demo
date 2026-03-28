@@ -1,0 +1,172 @@
+/* ============================================================
+   MESSAGES
+   Grouped messages, Thread, Bubbles
+   ============================================================ */
+
+/* ── Bot Label ── */
+.msg-bot-label {
+    font-size: 11px;
+    color: var(--text-4);
+    font-style: italic;
+}
+
+/* ── Message Groups ── */
+.msg-groups {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.msg-group {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+}
+
+.msg-group-header {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 12px 16px;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    text-align: left;
+    transition: background 0.1s;
+}
+
+.msg-group-header:hover {
+    background: #fafafa;
+}
+
+.msg-group-avatar {
+    width: 34px;
+    height: 34px;
+    border-radius: 50%;
+    background: #e4e4e7;
+    border: 1px solid var(--border);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--text-2);
+    font-size: 12px;
+    font-weight: 600;
+    flex-shrink: 0;
+}
+
+.msg-group-info {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 1px;
+    min-width: 0;
+}
+
+.msg-group-number {
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--text-1);
+}
+
+.msg-group-preview {
+    font-size: 12px;
+    color: var(--text-3);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 340px;
+}
+
+.msg-group-meta {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 3px;
+    flex-shrink: 0;
+}
+
+.msg-group-count {
+    font-size: 11px;
+    background: var(--text-1);
+    color: #fff;
+    border-radius: 99px;
+    padding: 1px 7px;
+}
+
+.msg-group-time {
+    font-size: 11px;
+    color: var(--text-4);
+}
+
+.msg-group-chevron {
+    color: var(--text-4);
+    flex-shrink: 0;
+    margin-left: 2px;
+}
+
+.msg-group-body {
+    border-top: 1px solid var(--border-light);
+    padding: 14px;
+    background: var(--bg);
+}
+
+/* ── Message Thread ── */
+.msg-thread {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    max-height: 300px;
+    overflow-y: auto;
+    padding-bottom: 6px;
+}
+
+/* ── Message Bubbles ── */
+.msg-bubble-row {
+    display: flex;
+    justify-content: flex-start;
+}
+
+.msg-bubble-row--bot {
+    justify-content: flex-end;
+}
+
+.msg-bubble {
+    max-width: 68%;
+    padding: 7px 11px;
+    border-radius: 12px;
+    font-size: 12px;
+    line-height: 1.45;
+}
+
+.msg-bubble--user {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    color: var(--text-1);
+    border-bottom-left-radius: 3px;
+}
+
+.msg-bubble--bot {
+    background: var(--accent);
+    color: #fff;
+    border-bottom-right-radius: 3px;
+}
+
+.msg-bubble-text {
+    margin: 0 0 3px;
+}
+
+.msg-bubble-time {
+    font-size: 10px;
+    opacity: 0.55;
+    display: block;
+    text-align: right;
+}
+
+.msg-group-reply {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    margin-top: 10px;
+}

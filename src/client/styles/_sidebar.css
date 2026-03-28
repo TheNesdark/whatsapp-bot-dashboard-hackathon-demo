@@ -1,0 +1,226 @@
+/* ============================================================
+   SIDEBAR
+   ============================================================ */
+.sidebar {
+    width: var(--sidebar-w);
+    flex-shrink: 0;
+    background: var(--sidebar-bg);
+    display: flex;
+    flex-direction: column;
+    border-right: 1px solid var(--sidebar-border);
+}
+
+/* ── Logo ── */
+.sidebar-logo {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 18px 16px;
+}
+
+.sidebar-logo-icon {
+    width: 30px;
+    height: 30px;
+    border-radius: var(--radius);
+    background: #f1f5f9;
+    border: 1px solid #e2e8f0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    color: #0f172a;
+}
+
+.sidebar-logo-name {
+    font-size: 14px;
+    font-weight: 600;
+    color: #0f172a;
+    line-height: 1.2;
+    margin: 0;
+}
+
+.sidebar-logo-sub {
+    font-size: 12px;
+    color: #64748b;
+    margin: 1px 0 0;
+}
+
+/* ── Divider ── */
+.sidebar-divider {
+    height: 1px;
+    background: #f1f5f9;
+    margin: 0 12px;
+}
+
+/* ── Navigation ── */
+.sidebar-nav {
+    flex: 1;
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    gap: 1px;
+}
+
+.nav-link {
+    display: flex;
+    align-items: center;
+    justify-content: space-between; /* Add this to push badge to the right */
+    gap: 9px;
+    padding: 8px 10px;
+    border-radius: var(--radius);
+    font-size: 13px;
+    font-weight: 500;
+    color: #475569;
+    border: 1px solid transparent;
+    margin-bottom: 4px;
+    transition: background 0.1s, color 0.1s, border-color 0.1s;
+}
+
+.sidebar-badge {
+    background: var(--danger);
+    color: #fff;
+    font-size: 10px;
+    padding: 2px 6px;
+    border-radius: 10px;
+    font-weight: 600;
+}
+
+.nav-link:hover {
+    color: #0f172a;
+    background: #f8fafc;
+    border-color: #e2e8f0;
+}
+
+.nav-link--active {
+    background: #0f172a;
+    color: #f8fafc;
+}
+
+.nav-icon {
+    width: 15px;
+    height: 15px;
+    flex-shrink: 0;
+    color: inherit;
+}
+
+/* ── Footer ── */
+.sidebar-footer {
+    padding: 14px;
+    border-top: 1px solid var(--sidebar-border);
+}
+
+/* ── Operator Select ── */
+.sidebar-operator {
+    padding: 10px 14px;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.sidebar-operator-label {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    font-size: 10px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: #64748b;
+}
+
+.sidebar-operator-select {
+    width: 100%;
+    padding: 6px 8px;
+    border-radius: var(--radius);
+    border: 1px solid #e2e8f0;
+    background: #fff;
+    color: #0f172a;
+    font-size: 12px;
+    outline: none;
+    cursor: pointer;
+    appearance: auto;
+}
+
+.sidebar-operator-select:focus {
+    border-color: #0f172a;
+}
+
+.sidebar-operator-empty {
+    font-size: 11px;
+    color: #52525b;
+    font-style: italic;
+}
+
+/* ── Server Status ── */
+.server-status {
+    display: flex;
+    align-items: center;
+    gap: 7px;
+    padding: 5px 8px;
+}
+
+.server-status-dot {
+    position: relative;
+    width: 7px;
+    height: 7px;
+    flex-shrink: 0;
+}
+
+.server-status-dot-inner,
+.server-status-dot-ping {
+    position: absolute;
+    inset: 0;
+    border-radius: 50%;
+}
+
+.server-status-dot-inner {
+    background: #4ade80;
+}
+
+.server-status-dot-ping {
+    background: #4ade80;
+    opacity: 0.5;
+    animation: ping 2s cubic-bezier(0, 0, 0.2, 1) infinite;
+}
+
+.server-status-label {
+    font-size: 11px;
+    color: #64748b;
+}
+
+/* ── Status Icons ── */
+.server-status-icon {
+  width: 12px;
+  height: 12px;
+  flex-shrink: 0;
+}
+
+.server-status-icon--connected {
+  color: #4ade80;
+}
+
+.server-status-icon--disconnected {
+  color: #f87171;
+}
+
+/* ── Status Dot States ── */
+.server-status-dot--connected .server-status-dot-inner {
+  background: #4ade80;
+}
+
+.server-status-dot--connected .server-status-dot-ping {
+  background: #4ade80;
+  opacity: 0.5;
+  animation: ping 2s cubic-bezier(0, 0, 0.2, 1) infinite;
+}
+
+.server-status-dot--disconnected .server-status-dot-inner {
+  background: #f87171;
+}
+
+@keyframes ping {
+  75%, 100% {
+    transform: scale(2);
+    opacity: 0;
+  }
+}

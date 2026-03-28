@@ -1,0 +1,82 @@
+/* ============================================================
+   RESET & BASE
+   ============================================================ */
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    font-family: -apple-system, BlinkMacSystemFont, 'Inter', 'Segoe UI', system-ui, sans-serif;
+    font-size: 14px;
+    line-height: 1.5;
+    -webkit-font-smoothing: antialiased;
+    background: var(--bg);
+    color: var(--text-1);
+}
+
+button {
+    cursor: pointer;
+    border: none;
+    background: none;
+    font: inherit;
+    padding: 0;
+}
+
+input,
+select,
+textarea {
+    font: inherit;
+}
+
+table {
+    border-collapse: collapse;
+    width: 100%;
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+::-webkit-scrollbar {
+    width: 4px;
+    height: 4px;
+}
+
+::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #d4d4d8;
+    border-radius: 99px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #a1a1aa;
+}
+
+/* ── Utilidades ── */
+kbd {
+    padding: 1px 5px;
+    background: var(--border);
+    border-radius: 3px;
+    font-family: monospace;
+    font-size: 10px;
+    color: var(--text-2);
+}
+
+/* ── Accessibility: respect user motion preferences ── */
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+    }
+}

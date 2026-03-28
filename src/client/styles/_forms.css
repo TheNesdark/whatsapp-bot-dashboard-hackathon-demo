@@ -1,0 +1,277 @@
+/* ============================================================
+   FORMS
+   Inputs, Selects, Filters, Upload Zone
+   ============================================================ */
+
+/* ── Filter Bar ── */
+.filter-bar {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 6px;
+}
+
+/* ── Search ── */
+.search-wrapper {
+    position: relative;
+}
+
+.search-icon {
+    position: absolute;
+    left: 9px;
+    top: 50%;
+    transform: translateY(-50%);
+    pointer-events: none;
+    color: var(--text-4);
+}
+
+.search-input {
+    padding: 5px 10px 5px 28px;
+    font-size: 12px;
+    border: 1px solid #e2e8f0;
+    border-radius: var(--radius);
+    background: #fff;
+    outline: none;
+    width: 180px;
+    color: var(--text-1);
+    transition: border-color 0.12s, background 0.12s;
+}
+
+.search-input:focus {
+    background: var(--surface);
+    border-color: #0f172a;
+}
+
+/* ── Filter Select ── */
+.filter-select {
+    padding: 5px 10px;
+    font-size: 12px;
+    border: 1px solid #e2e8f0;
+    border-radius: var(--radius);
+    background: #fff;
+    outline: none;
+    color: var(--text-2);
+    transition: border-color 0.12s;
+}
+
+.filter-select:focus {
+    background: var(--surface);
+    border-color: #0f172a;
+}
+
+/* ── Reply Form ── */
+.reply-form {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.reply-input {
+    padding: 5px 10px;
+    font-size: 12px;
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    background: var(--bg);
+    outline: none;
+    color: var(--text-1);
+    transition: border-color 0.12s;
+}
+
+.reply-input:focus {
+    border-color: var(--text-3);
+    background: var(--surface);
+}
+
+.reply-input--full {
+    flex: 1;
+}
+
+/* ── Send Button ── */
+.btn-send {
+    width: 30px;
+    height: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--accent);
+    color: #fff;
+    border-radius: var(--radius);
+    flex-shrink: 0;
+    transition: opacity 0.1s;
+}
+
+.btn-send:hover:not(:disabled) {
+    opacity: 0.8;
+}
+
+.btn-send:disabled {
+    opacity: 0.3;
+    cursor: not-allowed;
+}
+
+/* ── Reply/Cancel Links ── */
+.btn-reply-link {
+    background: none;
+    border: none;
+    color: var(--text-2);
+    font-size: 12px;
+    cursor: pointer;
+    padding: 0;
+    text-decoration: underline;
+    text-underline-offset: 2px;
+}
+
+.btn-reply-link:hover {
+    color: var(--text-1);
+}
+
+.btn-cancel-link {
+    background: none;
+    border: none;
+    color: var(--text-4);
+    font-size: 12px;
+    cursor: pointer;
+    padding: 0;
+}
+
+.btn-cancel-link:hover {
+    color: var(--text-3);
+}
+
+/* ── Upload Zone ── */
+.upload-zone-label {
+    font-size: 11px;
+    font-weight: 500;
+    color: var(--text-3);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    display: block;
+    margin-bottom: 6px;
+}
+
+.upload-zone {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    border: 1px dashed var(--border);
+    border-radius: var(--radius);
+    cursor: pointer;
+    overflow: hidden;
+    transition: border-color 0.12s, background 0.12s;
+    background: var(--bg);
+}
+
+.upload-zone:hover {
+    border-color: var(--text-3);
+    background: #f4f4f5;
+}
+
+.upload-zone-placeholder {
+    height: 110px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    text-align: center;
+    padding: 16px;
+}
+
+.upload-zone-icon-wrap {
+    width: 34px;
+    height: 34px;
+    border-radius: var(--radius);
+    background: var(--border);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--text-4);
+}
+
+.upload-zone-text {
+    font-size: 12px;
+    color: var(--text-3);
+    margin: 0;
+}
+
+.upload-zone-hint {
+    font-size: 11px;
+    color: var(--text-4);
+    margin: 0;
+}
+
+.upload-preview {
+    position: relative;
+    width: 100%;
+}
+
+.upload-preview img {
+    width: 100%;
+    max-height: 160px;
+    object-fit: contain;
+    display: block;
+}
+
+.upload-remove-btn {
+    position: absolute;
+    top: 6px;
+    right: 6px;
+    width: 26px;
+    height: 26px;
+    background: rgba(0, 0, 0, 0.5);
+    border: none;
+    border-radius: 50%;
+    color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: background 0.1s;
+}
+
+.upload-remove-btn:hover {
+    background: rgba(0, 0, 0, 0.7);
+}
+
+.upload-hint {
+    font-size: 11px;
+    color: var(--text-4);
+    line-height: 1.5;
+    margin: 0;
+}
+
+/* ── View Toggle ── */
+.view-toggle {
+    display: flex;
+    gap: 2px;
+    background: var(--bg);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 2px;
+}
+
+.view-toggle-btn {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    padding: 4px 12px;
+    border-radius: calc(var(--radius) - 1px);
+    border: none;
+    background: transparent;
+    color: var(--text-3);
+    font-size: 12px;
+    cursor: pointer;
+    transition: background 0.1s, color 0.1s;
+}
+
+.view-toggle-btn:hover {
+    color: var(--text-1);
+}
+
+.view-toggle-btn--active {
+    background: var(--surface);
+    color: var(--text-1);
+    box-shadow: var(--shadow);
+}

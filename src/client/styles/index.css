@@ -1,0 +1,29 @@
+/* ============================================================
+   MAIN STYLESHEET
+   Importa todos los módulos de estilos organizados
+   ============================================================ */
+
+/* ── Fundamentos ── */
+@import './_variables.css';
+@import './_base.css';
+@import './_animations.css';
+
+/* ── Layout ── */
+@import './_layout.css';
+@import './_sidebar.css';
+
+/* ── Componentes ── */
+@import './_components.css';
+@import './_forms.css';
+@import './_table.css';
+@import './_modal.css';
+@import './_toasts.css';
+
+/* ── Páginas ── */
+@import './_messages.css';
+@import './_chat.css';
+@import './_settings.css';
+@import './_reports.css';
+@import './_login.css';
+@import './_help.css';
+@import './_flow.css';
