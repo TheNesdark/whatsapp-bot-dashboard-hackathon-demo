@@ -90,28 +90,20 @@ export default function Settings() {
 
       <div className="s-layout">
         <section className="s-section">
-          <SectionHeader icon={<Server size={14} />} title="Sistema" description="Configuracion del servidor y conexion con WhatsApp Business API de Meta." />
+          <SectionHeader icon={<Server size={14} />} title="Sistema" description="Configuracion general del servidor. En la demo, las credenciales de WhatsApp se leen desde .env." />
           <div className="s-fields">
             <div className="s-field">
-              <label className="s-label" htmlFor="s-verify-token">Token de verificacion del webhook (Meta)</label>
-              <input id="s-verify-token" className="s-input" type="text" {...register('waba_verify_token')} placeholder="Ej: mi_token_secreto_2024" />
-              {errors.waba_verify_token && <span className="s-error">{errors.waba_verify_token.message}</span>}
-              <span className="s-hint">Debe coincidir con el valor configurado en Meta Developers.</span>
+              <label className="s-label">Variables de entorno requeridas para WhatsApp</label>
+              <div className="alert alert--info" style={{ alignItems: 'flex-start' }}>
+                <div>
+                  <div><code>WABA_VERIFY_TOKEN</code></div>
+                  <div><code>WHATSAPP_ACCESS_TOKEN</code></div>
+                  <div><code>WABA_PHONE_NUMBER_ID</code></div>
+                  <div><code>APP_URL</code></div>
+                </div>
+              </div>
+              <span className="s-hint">Estos valores ya no se guardan desde el dashboard en esta copia demo.</span>
             </div>
-
-            <div className="s-field">
-              <label className="s-label" htmlFor="s-wa-token">Token de acceso de WhatsApp (global)</label>
-              <input id="s-wa-token" className="s-input" type="password" {...register('whatsapp_access_token')} placeholder="Token de acceso permanente de Meta" />
-              <span className="s-hint">Token de acceso de la API de WhatsApp Business.</span>
-            </div>
-
-            <div className="s-field">
-              <label className="s-label" htmlFor="s-app-url">URL publica de la aplicacion</label>
-              <input id="s-app-url" className="s-input" type="url" {...register('app_url')} placeholder="https://mi-dominio.com" />
-              {errors.app_url && <span className="s-error">{errors.app_url.message}</span>}
-              <span className="s-hint">URL base del servidor. Se usa para el webhook.</span>
-            </div>
-
             <div className="s-row-2">
               <div className="s-field">
                 <label className="s-label" htmlFor="s-timezone">Zona horaria</label>

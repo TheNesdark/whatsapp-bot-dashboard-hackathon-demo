@@ -308,7 +308,7 @@ export default function Reports() {
             <SummaryCard label="Pendientes" value={pending} icon={<Clock size={18} />} variant="amber" />
             <SummaryCard label="En confirmacion" value={confirming} icon={<Hourglass size={18} />} variant="blue" />
             <SummaryCard label="Rechazados" value={rejected} icon={<XCircle size={18} />} variant="red" />
-            <SummaryCard label="Total mensajes" value={messages} icon={<MessageSquare size={18} />} variant="default" />
+            <SummaryCard label="Total de mensajes" value={messages} icon={<MessageSquare size={18} />} variant="default" />
           </div>
 
           {total > 0 && (
@@ -359,7 +359,7 @@ export default function Reports() {
           <div className="rep-card">
             <div className="rep-card-header">
               <BarChart2 size={15} />
-              <span>Aceptadas vs Rechazadas por dia - {daysLabel}</span>
+              <span>Aceptados vs rechazados por dia - {daysLabel}</span>
             </div>
             <DayStatusChart days={statusDays} />
           </div>

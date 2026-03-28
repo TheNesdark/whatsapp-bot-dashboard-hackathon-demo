@@ -1,9 +1,9 @@
 import type { ReportFilters } from '@/hooks';
 
 export const REPORT_DAYS_OPTIONS = [
-  { value: '7', label: 'Ãšltimos 7 dÃ­as' },
-  { value: '30', label: 'Ãšltimos 30 dÃ­as' },
-  { value: '90', label: 'Ãšltimos 90 dÃ­as' },
+  { value: '7', label: 'Ultimos 7 dias' },
+  { value: '30', label: 'Ultimos 30 dias' },
+  { value: '90', label: 'Ultimos 90 dias' },
   { value: 'all', label: 'Todo el tiempo' },
 ] as const;
 

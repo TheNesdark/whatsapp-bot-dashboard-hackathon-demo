@@ -53,7 +53,7 @@ function CreateModal({
     extra?: { maxLength?: number };
   }> = [
     { label: 'Nombre de la instancia', key: 'name', ph: 'Ej: Ventas, Soporte...', extra: { maxLength: 64 } },
-    { label: 'ID de numero de WhatsApp', key: 'phone', ph: 'Ej: 1234567890' },
+    { label: 'ID de numero de WhatsApp (opcional)', key: 'phone', ph: 'Se toma de .env si lo dejas vacio' },
     { label: 'URL de la API (opcional)', key: 'apiUrl', ph: 'https://graph.facebook.com/v22.0' },
   ];
 
@@ -83,7 +83,8 @@ function CreateModal({
             ))}
             {error && <p style={{ color: 'var(--danger)', fontSize: '0.8rem', marginTop: '0.4rem' }}>{error}</p>}
             <p style={{ fontSize: '0.78rem', color: 'var(--text-muted)', marginTop: '0.75rem' }}>
-              Introduce el ID de numero provisto por Meta. El token de acceso se configura globalmente en Settings.
+              En la demo, el token y el numero principal de WhatsApp se leen desde <code>.env</code>.
+              Este campo solo sirve como override opcional por instancia.
             </p>
           </div>
           <div className="modal-footer">
@@ -108,7 +109,7 @@ export default function Instances() {
       <div className="page-header">
         <div>
           <h1 className="page-title">Instancias de WhatsApp</h1>
-          <p className="page-subtitle">Gestiona multiples numeros de WhatsApp conectados al bot.</p>
+          <p className="page-subtitle">Gestiona las instancias de la demo. La configuracion principal de WhatsApp sale de <code>.env</code>.</p>
         </div>
         <button className="btn btn--primary" onClick={openCreateModal}>
           <Plus size={15} /> Nueva instancia
@@ -128,7 +129,7 @@ export default function Instances() {
       ) : instances.length === 0 ? (
         <div style={{ textAlign: 'center', padding: '4rem 2rem', color: 'var(--text-muted)', fontSize: '0.9rem' }}>
           <p>No hay instancias registradas.</p>
-          <p>Haz clic en <strong>Nueva instancia</strong> para agregar un numero de WhatsApp Business.</p>
+          <p>Haz clic en <strong>Nueva instancia</strong> para agregar una instancia de la demo.</p>
         </div>
       ) : (
         <div className="inst-grid">

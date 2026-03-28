@@ -25,7 +25,8 @@ export async function createInstanceController(req: Request, res: Response): Pro
     return;
   }
 
-  const { name, phoneNumberId } = parsed.data;
+  const { name } = parsed.data;
+  const phoneNumberId = parsed.data.phoneNumberId?.trim() ? parsed.data.phoneNumberId.trim() : null;
   const apiUrl = parsed.data.apiUrl?.trim() ? parsed.data.apiUrl.trim() : null;
 
   if ((stmts.selectAllInstances.all() as InstanceRow[]).length >= MAX_INSTANCES) {
@@ -33,10 +34,12 @@ export async function createInstanceController(req: Request, res: Response): Pro
     return;
   }
 
-  const existingByPhone = stmts.selectInstanceByPhoneId.get(phoneNumberId) as InstanceRow | undefined;
-  if (existingByPhone) {
-    res.status(409).json({ error: INSTANCE_PHONE_EXISTS_ERROR });
-    return;
+  if (phoneNumberId) {
+    const existingByPhone = stmts.selectInstanceByPhoneId.get(phoneNumberId) as InstanceRow | undefined;
+    if (existingByPhone) {
+      res.status(409).json({ error: INSTANCE_PHONE_EXISTS_ERROR });
+      return;
+    }
   }
 
   try {

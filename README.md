@@ -22,6 +22,8 @@ Esta copia fue pensada para:
    bun install
    ```
 2. Crea tu `.env` a partir de `.env.example`.
+   Variables clave para WhatsApp:
+   `WABA_VERIFY_TOKEN`, `WHATSAPP_ACCESS_TOKEN`, `WABA_PHONE_NUMBER_ID`, `APP_URL`
 3. Inicia en desarrollo:
    ```bash
    bun run dev

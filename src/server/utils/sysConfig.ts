@@ -1,7 +1,7 @@
 /**
- * sysConfig.ts — Configuración de sistema desde la BD.
- * Usa los prepared statements globales para no crear nuevas queries por llamada.
- * Si la clave no existe en BD, hace fallback a variables de entorno.
+ * sysConfig.ts — Configuración de sistema para la demo.
+ * Las credenciales de WhatsApp se leen desde variables de entorno.
+ * Los valores no sensibles siguen pudiendo usar la BD.
  */
 import { stmts } from '@server/db/db';
 
@@ -12,13 +12,13 @@ function getSetting(key: string, fallback = ''): string {
 
 /** Token para la verificación del webhook de Meta */
 export function getWabaVerifyToken(): string {
-  return getSetting('waba_verify_token', process.env.WABA_VERIFY_TOKEN ?? 'verify');
+  return (process.env.WABA_VERIFY_TOKEN ?? 'verify').trim();
 }
 
 /** URL pública de la aplicación */
 export function getAppUrl(): string {
   const port = process.env.PORT ?? '3002';
-  return getSetting('app_url', process.env.APP_URL ?? `http://localhost:${port}`);
+  return (process.env.APP_URL ?? `http://localhost:${port}`).trim();
 }
 
 /** Zona horaria del servidor */
@@ -28,12 +28,7 @@ export function getTimezone(): string {
 
 /** Token de acceso global para WhatsApp Business API */
 export function getWabaAccessToken(): string {
-  // Clave canónica en BD: whatsapp_access_token
-  // Compatibilidad legacy: waba_access_token
-  const value = getSetting('whatsapp_access_token');
-  if (value) return value;
-  const legacy = getSetting('waba_access_token');
-  return legacy || process.env.WHATSAPP_ACCESS_TOKEN || process.env.WABA_ACCESS_TOKEN || '';
+  return (process.env.WHATSAPP_ACCESS_TOKEN ?? process.env.WABA_ACCESS_TOKEN ?? '').trim();
 }
 
 /**
@@ -41,5 +36,5 @@ export function getWabaAccessToken(): string {
  * La app usa phoneNumberId por instancia; este valor se mantiene por compatibilidad.
  */
 export function getWabaPhoneNumberId(): string {
-  return getSetting('waba_phone_number_id', process.env.WABA_PHONE_NUMBER_ID ?? '');
+  return (process.env.WABA_PHONE_NUMBER_ID ?? '').trim();
 }

@@ -3,7 +3,7 @@ import type { WabaConfig } from './businessApi';
 import { sendTextMessage, sendImageMessage, sendButtonMessage, sendListMessage } from './businessApi';
 import { stmts } from '@server/db/db';
 import { broadcast } from '@server/services/wsServer';
-import { getWabaAccessToken } from '@server/utils/sysConfig';
+import { getWabaAccessToken, getWabaPhoneNumberId } from '@server/utils/sysConfig';
 import { getStoredContactId, resolveDeliveryTarget } from '@server/utils/demoPrivacy';
 import type { ButtonOption, ListOption, ReplyMessage } from '@server/types';
 
@@ -20,11 +20,12 @@ function getConfigForInstance(instanceId: number): WabaConfig | null {
     console.warn(`[WA] Token de WhatsApp no configurado`);
     return null;
   }
-  if (!inst.phoneNumberId) {
+  const phoneNumberId = inst.phoneNumberId ?? getWabaPhoneNumberId();
+  if (!phoneNumberId) {
     console.warn(`[WA] Instancia ${instanceId}: falta phoneNumberId`);
     return null;
   }
-  return { accessToken, phoneNumberId: inst.phoneNumberId };
+  return { accessToken, phoneNumberId };
 }
 
 /** Envía un mensaje de texto via WhatsApp Business API */

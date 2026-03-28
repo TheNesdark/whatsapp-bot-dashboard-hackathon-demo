@@ -12,7 +12,7 @@ export default defineConfig(() => {
       },
     },
     server: {
-      allowedHosts: true,
+      allowedHosts: true as const,
       watch: {
         // Exclude session, uploads and database files so Vite doesn't reload on every WA event
         ignored: [

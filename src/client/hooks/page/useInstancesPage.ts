@@ -12,7 +12,7 @@ const EMPTY_FIELDS: CreateInstanceFormValues = {
 function mapCreateInstanceFormToInput(values: CreateInstanceFormValues): CreateInstanceInput {
   return {
     name: values.name,
-    phoneNumberId: values.phone,
+    phoneNumberId: values.phone || undefined,
     apiUrl: values.apiUrl || undefined,
   };
 }
