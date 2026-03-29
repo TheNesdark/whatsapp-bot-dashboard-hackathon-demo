@@ -225,12 +225,12 @@ export function RegistrationTable({
             ))}
           </select>
           <select
-            value={epsFilter}
-            onChange={(e) => onEpsFilterChange(e.target.value)}
+            value={areaFilter}
+            onChange={(e) => onAreaFilterChange(e.target.value)}
             className="filter-select"
           >
-            <option value="all">Toda EPS</option>
-            {epsList.map((e) => (
+            <option value="all">Toda Área</option>
+            {areaList.map((e) => (
               <option key={e} value={e}>{e}</option>
             ))}
           </select>
