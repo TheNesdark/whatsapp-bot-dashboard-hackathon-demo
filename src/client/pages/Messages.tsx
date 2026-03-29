@@ -54,7 +54,7 @@ export default function Messages() {
               </tr>
             </thead>
             <tbody>
-              {pageMessages.length === 0 ? (
+              {Array.isArray(pageMessages) && pageMessages.length === 0 ? (
                 <tr>
                   <td colSpan={4} className="td-empty">
                     <div className="td-empty-inner">
@@ -64,7 +64,7 @@ export default function Messages() {
                   </td>
                 </tr>
               ) : (
-                pageMessages.map((message) => (
+                Array.isArray(pageMessages) && pageMessages.map((message) => (
                   <tr key={message.id}>
                     <td className="td-name">
                       {isFromBot(message.from_number) ? <span className="msg-bot-label">Bot</span> : displayPhone(message.from_number)}

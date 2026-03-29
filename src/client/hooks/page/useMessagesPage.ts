@@ -13,9 +13,9 @@ export function useMessagesPage() {
   const [sending, setSending] = useState(false);
   const [currentPage, setCurrentPage] = useState(1);
 
-  const totalPages = Math.max(1, Math.ceil(messages.length / MESSAGES_PAGE_SIZE));
+  const totalPages = Math.max(1, Math.ceil((Array.isArray(messages) ? messages.length : 0) / MESSAGES_PAGE_SIZE));
   const safePage = Math.min(currentPage, totalPages);
-  const pageMessages = messages.slice((safePage - 1) * MESSAGES_PAGE_SIZE, safePage * MESSAGES_PAGE_SIZE);
+  const pageMessages = Array.isArray(messages) ? messages.slice((safePage - 1) * MESSAGES_PAGE_SIZE, safePage * MESSAGES_PAGE_SIZE) : [];
 
   useEffect(() => {
     if (currentPage > totalPages) {

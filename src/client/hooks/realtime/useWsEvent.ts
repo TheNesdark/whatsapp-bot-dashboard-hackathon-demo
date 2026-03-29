@@ -14,7 +14,8 @@ const MAX_RECONNECT_DELAY = 30000;
 
 function buildWsUrl(): string {
     const protocol = window.location.protocol === 'https:' ? 'wss:' : 'ws:';
-    return `${protocol}//${window.location.host}/ws`;
+    const host = window.location.host;
+    return `${protocol}//${host}/ws`;
 }
 
 function getReconnectDelay(): number {
