@@ -10,13 +10,13 @@ export function useDashboardPage() {
   const { addToast } = useToastStore();
   const { registrations, refetch } = useDashboardData();
   const { settings } = useSettings();
-  const { filterRegistrations, epsList } = useRegistrationFilters(registrations);
+  const { filterRegistrations, areaList } = useRegistrationFilters(registrations);
   const stats = useRegistrationStats(registrations);
   const agentName = useUiStore((state) => state.agentName);
 
   const [regSearch, setRegSearch] = useState('');
   const [regStatusFilter, setRegStatusFilter] = useState('all');
-  const [regEpsFilter, setRegEpsFilter] = useState('all');
+  const [regAreaFilter, setRegAreaFilter] = useState('all');
   const [rejectTarget, setRejectTarget] = useState<ModalTarget | null>(null);
   const [acceptTarget, setAcceptTarget] = useState<ModalTarget | null>(null);
 
@@ -43,11 +43,11 @@ export function useDashboardPage() {
     return parseJsonArray(settings?.accept_reasons);
   }, [settings?.accept_reasons]);
 
-  const filteredRegistrations = filterRegistrations(regSearch, regStatusFilter, regEpsFilter);
+  const filteredRegistrations = filterRegistrations(regSearch, regStatusFilter, regAreaFilter);
 
   return {
     stats,
-    epsList,
+    areaList,
     agentName,
     refetch,
     rejectReasons,
@@ -57,8 +57,8 @@ export function useDashboardPage() {
     setRegSearch,
     regStatusFilter,
     setRegStatusFilter,
-    regEpsFilter,
-    setRegEpsFilter,
+    regAreaFilter,
+    setRegAreaFilter,
     rejectTarget,
     setRejectTarget,
     acceptTarget,

@@ -75,11 +75,11 @@ export function useRegistrationStats(registrations: Registration[]) {
 }
 
 export function useRegistrationFilters(registrations: Registration[]) {
-  // Ya no tenemos una columna fija de EPS, podriamos buscar en data pero por ahora deshabilitamos el filtro especifico
-  const epsList: string[] = [];
+  // Ya no tenemos una columna fija de Área, podriamos buscar en data pero por ahora deshabilitamos el filtro especifico
+  const areaList: string[] = [];
 
   const filterRegistrations = useCallback(
-    (search: string, statusFilter: string, _epsFilter: string): Registration[] => {
+    (search: string, statusFilter: string, _areaFilter: string): Registration[] => {
       if (!Array.isArray(registrations)) return [];
       const query = search.toLowerCase();
       return registrations.filter((registration) => {
@@ -96,5 +96,5 @@ export function useRegistrationFilters(registrations: Registration[]) {
     [registrations],
   );
 
-  return { epsList, filterRegistrations };
+  return { areaList, filterRegistrations };
 }

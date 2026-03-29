@@ -9,7 +9,7 @@ export default function Dashboard() {
   const { settings } = useSettings();
   const {
     stats,
-    epsList,
+    areaList,
     agentName,
     refetch,
     rejectReasons,
@@ -19,8 +19,8 @@ export default function Dashboard() {
     setRegSearch,
     regStatusFilter,
     setRegStatusFilter,
-    regEpsFilter,
-    setRegEpsFilter,
+    regAreaFilter,
+    setRegAreaFilter,
     rejectTarget,
     setRejectTarget,
     acceptTarget,
@@ -38,7 +38,7 @@ export default function Dashboard() {
       <div className="page-header">
         <div>
           <h1 className="page-title">Dashboard</h1>
-          <p className="page-subtitle">Gestion de registros.</p>
+          <p className="page-subtitle">Gestión de registros.</p>
         </div>
       </div>
 
@@ -55,9 +55,9 @@ export default function Dashboard() {
         onSearchChange={setRegSearch}
         statusFilter={regStatusFilter}
         onStatusFilterChange={setRegStatusFilter}
-        epsFilter={regEpsFilter}
-        onEpsFilterChange={setRegEpsFilter}
-        epsList={epsList}
+        areaFilter={regAreaFilter}
+        onAreaFilterChange={setRegAreaFilter}
+        areaList={areaList}
         onAccept={(id, phone) => onApproveAction(id, phone, 'approved')}
         onReject={(id, phone) => setRejectTarget({ id, phone })}
         onApprove={(id, phone, _, event) => onApproveAction(id, phone, event)}

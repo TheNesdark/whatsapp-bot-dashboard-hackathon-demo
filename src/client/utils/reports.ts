@@ -122,7 +122,7 @@ export function exportExcel(data: ReportsData, filters: ReportFilters) {
 
   for (const variable of data.flowVariables) {
     const variableData = data.byVariable[variable.id] || [];
-    const rows = [[variable.label, 'Cantidad'], ...variableData.map((row) => [row.label || '(Vacio)', row.count])];
+    const rows = [[variable.label, 'Cantidad'], ...variableData.map((row) => [row.label || '(Vacío)', row.count])];
     XLSX.utils.book_append_sheet(workbook, XLSX.utils.aoa_to_sheet(rows), variable.label.slice(0, 31));
   }
 
