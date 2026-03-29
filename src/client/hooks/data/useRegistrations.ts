@@ -57,17 +57,19 @@ export function useRegistrationActions() {
 
 export function useRegistrationStats(registrations: Registration[]) {
   const stats = {
-    total: registrations.length,
+    total: Array.isArray(registrations) ? registrations.length : 0,
     pending: 0,
     accepted: 0,
     rejected: 0,
   };
 
-  registrations.forEach((reg) => {
-    if (reg.status === 'pending') stats.pending++;
-    else if (reg.status === 'accepted') stats.accepted++;
-    else if (reg.status === 'rejected') stats.rejected++;
-  });
+  if (Array.isArray(registrations)) {
+    registrations.forEach((reg) => {
+      if (reg.status === 'pending') stats.pending++;
+      else if (reg.status === 'accepted') stats.accepted++;
+      else if (reg.status === 'rejected') stats.rejected++;
+    });
+  }
 
   return stats;
 }
@@ -78,6 +80,7 @@ export function useRegistrationFilters(registrations: Registration[]) {
 
   const filterRegistrations = useCallback(
     (search: string, statusFilter: string, _epsFilter: string): Registration[] => {
+      if (!Array.isArray(registrations)) return [];
       const query = search.toLowerCase();
       return registrations.filter((registration) => {
         const matchesSearch =
