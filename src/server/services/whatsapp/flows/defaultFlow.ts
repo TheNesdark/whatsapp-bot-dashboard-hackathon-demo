@@ -54,13 +54,13 @@ export function generateDefaultFlow(): FlowDefinition {
       id: 'node-name',
       type: 'question',
       position: { x: 400, y: 560 },
-      data: { message: MSG.ASK_NAME, variable: 'name', validation: 'text' },
+      data: { message: MSG.ASK_NAME, variable: 'full_name', validation: 'text' },
     },
     {
       id: 'node-cedula',
       type: 'question',
       position: { x: 400, y: 720 },
-      data: { message: MSG.ASK_CEDULA, variable: 'cedula', validation: 'document' },
+      data: { message: MSG.ASK_CEDULA, variable: 'document_number', validation: 'document' },
     },
     {
       id: 'node-eps',
@@ -69,7 +69,7 @@ export function generateDefaultFlow(): FlowDefinition {
       data: {
         title: MSG.ASK_EPS,
         options: epsList.map((label, i) => ({ id: `eps-${i}`, label })),
-        variable: 'eps',
+        variable: 'service_area',
       },
     },
     {
@@ -79,7 +79,7 @@ export function generateDefaultFlow(): FlowDefinition {
       data: {
         title: MSG.ASK_APPT,
         options: apptTypes.map((label, i) => ({ id: `appt-${i}`, label })),
-        variable: 'appointmentType',
+        variable: 'request_type',
       },
     },
     {
