@@ -63,21 +63,9 @@ export function generateDefaultFlow(): FlowDefinition {
       data: { message: MSG.ASK_CEDULA, variable: 'cedula', validation: 'document' },
     },
     {
-      id: 'node-phone',
-      type: 'question',
-      position: { x: 400, y: 880 },
-      data: { message: MSG.ASK_PHONE, variable: 'phone', validation: 'phone' },
-    },
-    {
-      id: 'node-address',
-      type: 'question',
-      position: { x: 400, y: 1040 },
-      data: { message: MSG.ASK_ADDRESS, variable: 'address', validation: 'text' },
-    },
-    {
       id: 'node-eps',
       type: 'menu',
-      position: { x: 400, y: 1200 },
+      position: { x: 400, y: 880 },
       data: {
         title: MSG.ASK_EPS,
         options: epsList.map((label, i) => ({ id: `eps-${i}`, label })),
@@ -87,7 +75,7 @@ export function generateDefaultFlow(): FlowDefinition {
     {
       id: 'node-appt',
       type: 'menu',
-      position: { x: 400, y: 1400 },
+      position: { x: 400, y: 1080 },
       data: {
         title: MSG.ASK_APPT,
         options: apptTypes.map((label, i) => ({ id: `appt-${i}`, label })),
@@ -97,7 +85,7 @@ export function generateDefaultFlow(): FlowDefinition {
     {
       id: 'node-approval',
       type: 'operator_approval',
-      position: { x: 400, y: 1600 },
+      position: { x: 400, y: 1280 },
       data: {
         message: 'Tu solicitud esta siendo revisada por un operador...',
         branches: DEFAULT_OPERATOR_APPROVAL_BRANCHES,
@@ -314,12 +302,12 @@ export function normalizeFlowDefinition(definition: FlowDefinition): FlowDefinit
       const withBranches =
         node.type === 'operator_approval'
           ? ({
-              ...node,
-              data: {
-                ...(node.data as Record<string, unknown>),
-                branches: normalizeOperatorApprovalBranches(node),
-              },
-            } as FlowNode)
+            ...node,
+            data: {
+              ...(node.data as Record<string, unknown>),
+              branches: normalizeOperatorApprovalBranches(node),
+            },
+          } as FlowNode)
           : node;
 
       return normalizeLegacyEndAction(withBranches);

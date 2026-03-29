@@ -1,0 +1,42 @@
+{
+    # Configuración global
+    email test@localhost.com
+}
+
+:3002 {
+    # Servir archivos estáticos del frontend
+    root * /app/dist
+    file_server
+
+    # Proxy para la API
+    handle /api/* {
+        reverse_proxy localhost:3002
+    }
+
+    # Proxy para el Webhook
+    handle /webhook/* {
+        reverse_proxy localhost:3002
+    }
+
+    # CONFIGURACIÓN CRÍTICA PARA WEBSOCKETS
+    handle /ws {
+        reverse_proxy localhost:3002 {
+            header_up Host {host}
+            header_up X-Real-IP {remote_host}
+            header_up X-Forwarded-For {remote_host}
+            header_up X-Forwarded-Proto {scheme}
+            
+            # Caddy maneja automáticamente el Upgrade de WebSocket, 
+            # pero nos aseguramos de que no haya timeouts agresivos.
+            flush_interval -1
+        }
+    }
+
+    # Manejo de SPA (Single Page Application)
+    handle {
+        try_files {path} /index.html
+    }
+
+    # Compresión
+    encode gzip zstd
+}

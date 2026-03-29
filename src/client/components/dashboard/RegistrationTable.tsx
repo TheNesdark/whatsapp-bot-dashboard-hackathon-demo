@@ -46,6 +46,7 @@ export function RegistrationTable({
   flowVariables,
 }: RegistrationTableProps) {
   const dynamicColumns = useMemo(() => {
+    if (!Array.isArray(flowVariables)) return [];
     return flowVariables.map((variable) =>
       columnHelper.accessor((row) => row.data?.[variable.id] || '', {
         id: variable.id,
@@ -106,7 +107,7 @@ export function RegistrationTable({
         const hasPhone = Boolean(reg.whatsapp_number);
         const isMyAttending = reg.status === 'attending' && reg.attended_by === agentName;
         const isOtherAttending = reg.status === 'attending' && !isMyAttending;
-        
+
         const showAccept = canAccept(reg.status, isOtherAttending, hasPhone);
         const showReject = canReject(reg.status, isOtherAttending, hasPhone);
 
@@ -122,13 +123,13 @@ export function RegistrationTable({
             )}
 
             {/* Custom branches from flow editor */}
-            {branches.map((branch) => (
+            {Array.isArray(branches) && branches.map((branch) => (
               <button
                 key={branch.id}
                 className={cn(
                   'btn-icon',
-                  branch.status === 'accepted' || branch.event === 'approved' ? 'btn-icon--accept' : 
-                  branch.status === 'rejected' || branch.event === 'rejected' ? 'btn-icon--reject' : 'btn-icon--attend'
+                  branch.status === 'accepted' || branch.event === 'approved' ? 'btn-icon--accept' :
+                    branch.status === 'rejected' || branch.event === 'rejected' ? 'btn-icon--reject' : 'btn-icon--attend'
                 )}
                 title={branch.label}
                 onClick={() => {

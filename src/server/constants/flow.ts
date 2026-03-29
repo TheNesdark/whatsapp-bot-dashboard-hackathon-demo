@@ -18,46 +18,41 @@ export const VALID_FLOW_NODE_TYPES = new Set<FlowNodeType>([
 ]);
 
 export const DEFAULT_FLOW_EPS = [
-  'Producto A',
-  'Producto B',
-  'Producto C',
-  'Servicio Premium',
-  'Soporte',
   'Ventas',
-  'Alianzas',
-  'Otro',
+  'Soporte',
+  'Otros',
 ] as const;
 
 export const DEFAULT_FLOW_APPOINTMENT_TYPES = [
-  'Solicitud nueva',
-  'Seguimiento',
+  'Nueva Consulta',
+  'Reclamo',
 ] as const;
 
 export const DEFAULT_FLOW_MESSAGES = {
   WELCOME:
-    'Hola. Bienvenido a la demo publica. No compartas datos personales sensibles. Tu numero se anonimiza y no se guarda en texto plano.',
+    '¡Hola! Bienvenido a nuestra demo de WhatsApp Bot.',
   AUTH_INFO:
-    'Antes de continuar, recuerda que esta es una prueba publica. Comparte solo datos de ejemplo o informacion no sensible.',
+    'Para continuar, ¿aceptas los términos de uso de esta demo?',
   AUTH_TITLE:
-    'Autorizas el uso de tus datos para esta demo?',
+    '¿Autorizas el tratamiento de datos?',
   AUTH_REJECT:
-    'Entendido. No continuaremos sin tu autorizacion. Gracias por visitar la demo.',
+    'Entendido. Si cambias de opinión, aquí estaremos. ¡Adiós!',
   ASK_NAME:
-    'Por favor, escribe tu nombre:',
+    '¿Cuál es tu nombre?',
   ASK_CEDULA:
-    'Escribe un codigo o referencia:',
+    'Por favor, ingresa tu número de identificación:',
   ASK_PHONE:
-    'Cual es tu telefono o canal de contacto?',
+    '¿A qué número podemos contactarte?',
   ASK_ADDRESS:
-    'A que equipo, empresa o ciudad perteneces?',
+    '¿Desde qué ciudad nos escribes?',
   ASK_EPS:
-    'Selecciona una categoria:',
+    'Selecciona el área de interés:',
   ASK_CUSTOM_EPS:
-    'Escribe el nombre de la categoria:',
+    'Escribe el nombre del área:',
   ASK_APPT:
-    'Que tipo de solicitud quieres registrar?',
+    '¿Qué tipo de gestión deseas realizar?',
   END:
-    'Registro completado. Tu solicitud demo fue guardada correctamente.',
+    '¡Listo! Hemos recibido tu información. Pronto nos pondremos en contacto.',
   OPERATOR:
-    'Un miembro del equipo revisara tu solicitud en breve.',
+    'Te estamos transfiriendo con un asesor...',
 } as const;

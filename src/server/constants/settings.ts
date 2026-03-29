@@ -40,11 +40,9 @@ export const DEFAULT_SETTINGS: Record<string, string> = {
   dashboard_password_enabled: 'false',
   dashboard_password: '',
   flow_variables: JSON.stringify([
-    { id: 'name', label: 'Nombre', show_in_reports: false },
-    { id: 'cedula', label: 'Codigo o Referencia', show_in_reports: false },
-    { id: 'phone', label: 'Canal de Contacto', show_in_reports: false },
-    { id: 'address', label: 'Equipo o Ciudad', show_in_reports: false },
-    { id: 'eps', label: 'Categoria', show_in_reports: true },
-    { id: 'appointmentType', label: 'Tipo de Solicitud', show_in_reports: true }
+    { id: 'name', label: 'Nombre', show_in_reports: true },
+    { id: 'cedula', label: 'Identificación', show_in_reports: true },
+    { id: 'eps', label: 'Área', show_in_reports: true },
+    { id: 'appointmentType', label: 'Tipo', show_in_reports: true }
   ]),
 };
