@@ -59,7 +59,7 @@ const DEFAULT_NODE_DATA: Record<string, FlowNodeData> = {
   question: { message: '', variable: '' as FlowVariableType, validation: 'text' as QuestionValidationType },
   menu: { title: '', options: [] },
   buttons: { title: '', options: [] },
-  condition: { variable: '' as FlowVariableType, branches: [], defaultBranchId: `default-${Date.now()}` },
+  condition: { variable: '' as FlowVariableType, branches: [] },
   end: { message: '' },
   operator: { message: 'Un operador te atenderá en breve.' },
   operator_approval: {

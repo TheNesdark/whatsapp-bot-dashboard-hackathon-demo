@@ -42,12 +42,12 @@ import {
   normalizeFlowDefinition,
   normalizeOperatorApprovalBranches,
 } from './defaultFlow';
-import type { 
-  ReplyFn, 
-  OperatorApprovalEvent, 
-  RuntimeImage, 
-  FlowRuntimeContext, 
-  RegistrationConversationRow 
+import type {
+  ReplyFn,
+  OperatorApprovalEvent,
+  RuntimeImage,
+  FlowRuntimeContext,
+  RegistrationConversationRow
 } from '@server/types';
 import { normalizePhoneForStorage } from '../state';
 
@@ -255,7 +255,7 @@ export class FlowEngine {
     if (node.type === 'buttons') {
       const data = node.data as ButtonsNodeData;
       await replyTo(buildButtonMenu(
-        replaceVariables(data.title, state.variables), 
+        replaceVariables(data.title, state.variables),
         data.options.slice(0, 3).map((option) => option.label)
       ), 0);
       return;
@@ -354,7 +354,7 @@ export class FlowEngine {
           if (state.variables.rejection_reason) {
             message = `${message}\n\n*Motivo:* ${state.variables.rejection_reason}`;
           }
-        } catch (e) {}
+        } catch (e) { }
       }
       await replyTo(message);
     }
@@ -445,7 +445,7 @@ export class FlowEngine {
         state.failCount = 0;
         return this.handleNewConversation(cleanFrom, instanceManager.get(instanceId)!, {}, instanceId);
       }
-      
+
       this.endAndClearState(instanceId, cleanFrom, state);
       await replyTo(ERROR_MESSAGES.UNEXPECTED_ERROR);
       return;
@@ -501,13 +501,6 @@ export class FlowEngine {
       }
     }
 
-    if (data.defaultBranchId) {
-      const edge = this.definition.edges.find(
-        (item) => item.source === node.id && item.sourceHandle === data.defaultBranchId,
-      );
-      if (edge) return this.getNodeById(edge.target);
-    }
-
     const defaultEdge = this.definition.edges.find((item) => item.source === node.id && !item.sourceHandle);
     if (defaultEdge) return this.getNodeById(defaultEdge.target);
 
@@ -538,7 +531,7 @@ export class FlowEngine {
     const finalValue = (data.validation === 'document' || data.validation === 'phone' || data.validation === 'number')
       ? normalizeDigitsInput(trimmed)
       : sanitizeInput(trimmed);
-      
+
     state.variables[data.variable] = finalValue;
 
     const next = this.getNextNode(node.id);
@@ -691,7 +684,7 @@ export class FlowEngine {
       try {
         const name = (state.variables.name || state.variables.full_name || null) as string | null;
         const cedula = (state.variables.cedula || null) as string | null;
-        
+
         const existing = stmts.selectHelpRequestByPhone.get(from) as { id: number } | undefined;
         if (!existing) {
           const result = stmts.insertHelpRequest.run(
